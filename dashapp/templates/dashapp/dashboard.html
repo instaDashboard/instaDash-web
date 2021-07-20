@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Test Page</title>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        .DashTitle {
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="DashTitle">
+        <div class="panel-header bg-primary-gradient">
+            <div class="page-inner py-5">
+                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+                    <div class="ml-md-auto py-2 py-md-0">
+                        <h1 class="text-white pb-2 fw-bold" style="margin-left: 1rem;">Instagram Dashboard</h1>
+                        <h5 class="text-white op-7 mb-2" style="margin-left: 1rem;">인스타그램 인플루언서 대시보드</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    <div class="row row-card-no-pd">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-head-row card-tools-still-right">
+                        <h4 class="card-title">Users Information</h4>
+                    </div>
+                    <p class="card-category">인플루언서 유저 정보</p>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive table-hover table-sales">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+
+                                            <td><b>인스타그램ID | 닉네임</b></td>
+                                            <td><b>Follower</b></td>
+                                            <td class="text-align:center;">
+                                                <b>게시글 링크</b>
+                                            </td>
+                                            <td class="text-right">
+                                                <b>좋아요 수</b>
+                                            </td>
+                                            <td><b>댓글 수</b></td>
+                                            <td><b>게시 날짜</b></td>
+
+                                        </tr>
+       
+                                        {% for influencer in influencer_data %}
+                                            <tr>
+
+                                                <td>{{ influencer.insta_id }} | {{ influencer.username }}</td>
+                                                <td>{{ influencer.follower }}</td>
+                                                <td class="text-align:center;">
+                                                    <a href="https://www.instagram.com/p/{{ influencer.post_id }}" target="self">www.instagram.com/p/{{ influencer.post_id }}</a>
+                                                </td>
+                                                <td class="text-right">
+                                                    {{ influencer.likes_count }}
+                                                </td>
+                                                <td>{{ influencer.comments_count }}</td>
+                                                <td>{{ influencer.post_date }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                {% include 'snippets/pagination.html' with page_obj=page_obj page_range=page_range %}
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+
+</body>
+</html>

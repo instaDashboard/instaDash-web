@@ -1,0 +1,53 @@
+<style>
+    .pagination {
+      justify-content: center;
+      margin-top: 3rem;
+    }
+  </style>
+  
+  {% if is_paginated %}
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li class="page">
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-secondary rounded-pill">
+              <span>Prev</span>
+            </a>
+          </li>
+        {% else %}
+          <li class="disabled">
+            <a href="#" class="btn btn-secondary rounded-pill">
+              <span>Prev</span>
+            </a>
+          </li>
+        {% endif %}
+  
+        {% for page in page_range %}
+  
+          {% if page == page_obj.number %}
+            <li class="active">
+              <a href="?page={{ page }}" class="btn btn-outline-primary">{{ page }}</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="?page={{ page }}" class="btn btn-gray rounded-pill">{{ page }}</a>
+            </li>
+          {% endif %}
+  
+        {% endfor %}
+  
+        {% if page_obj.has_next %}
+          <li class="page">
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary rounded-pill">
+              <span>Next</span>
+            </a>
+          </li>
+        {% else %}
+          <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
+            <a href="#" class="btn btn-secondary rounded-pill">
+              <span>Next</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+  {% endif %}
+  
